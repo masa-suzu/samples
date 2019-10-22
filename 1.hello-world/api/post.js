@@ -12,16 +12,7 @@ app.use(bodyParser.json());
 
 const daprPort = process.env.DAPR_HTTP_PORT || 3500;
 const stateUrl = `http://localhost:${daprPort}/v1.0/state`;
-const port = 3000;
-
-app.get('/order', (_req, res) => {
-    fetch(`${stateUrl}/order`)
-        .then((response) => {
-            return response.json();
-        }).then((orders) => {
-            res.send(orders);
-        });
-});
+const port = 3002;
 
 app.post('/neworder', (req, res) => {
     const data = req.body.data;
@@ -46,4 +37,4 @@ app.post('/neworder', (req, res) => {
     res.status(200).send();
 });
 
-app.listen(port, () => console.log(`Node App listening on port ${port}!`));
+app.listen(port, () => console.log(`Node App listening on port ${port} on ${process.platform}!`));
